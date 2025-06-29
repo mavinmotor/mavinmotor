@@ -1,0 +1,48 @@
+'use client'
+
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+
+import type { Header } from '@/payload-types'
+
+import { Logo } from '@/components/Logo/Logo'
+import { HeaderNav } from './Nav'
+import { useHeaderTheme } from '@/components/theme-provider/headertheme'
+import { EndNav } from './NavEnd'
+
+interface HeaderClientProps {
+    data: Header
+}
+
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+    /* Storing the value in a useState to avoid hydration errors */
+    const [theme, setTheme] = useState<string | null>(null)
+    const { headerTheme, setHeaderTheme } = useHeaderTheme()
+    const pathname = usePathname()
+
+    useEffect(() => {
+        setHeaderTheme(null)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname])
+
+    useEffect(() => {
+        if (headerTheme && headerTheme !== theme) setTheme(headerTheme)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [headerTheme])
+
+    return (
+        <header className="sticky top-0 container z-20 backdrop-blur-3xl" {...(theme ? { 'data-theme': theme } : {})}>
+            <div className={'3xl:fixed:container flex h-16 items-center gap-2 **:data-[slot=separator]:!h-4'}>
+                <div className={'flex gap-5 items-center'}>
+                    <Link href="/">
+                        <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+                    </Link>
+                    <HeaderNav data={data} />
+                </div>
+                <EndNav />
+            </div>
+        </header>
+    )
+}

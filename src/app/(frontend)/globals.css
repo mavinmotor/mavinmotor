@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+;
 
 @utility container {
   margin-inline: auto;
@@ -18,6 +19,78 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@utility payload-richtext {
+  @apply flex flex-col gap-5;
+
+  p {
+    @apply text-sm font-light text-muted-foreground;
+  }
+
+  li {
+    @apply text-sm font-light text-muted-foreground;
+
+    strong {
+      @apply font-bold text-base text-accent-foreground;
+    }
+  }
+
+  .list-bullet {
+    @apply flex flex-col gap-2 list-disc pl-5;
+  }
+
+  .list-number {
+    @apply flex flex-col gap-2 list-decimal pl-5;
+  }
+
+  h1 {
+    @apply text-3xl font-black;
+  }
+
+  h2 {
+    @apply text-2xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl font-bold;
+  }
+
+  h4 {
+    @apply text-lg font-bold;
+  }
+
+  h5 {
+    @apply font-bold;
+  }
+
+  h6 {
+    @apply text-sm font-bold;
+  }
+
+  blockquote {
+    @apply border-l-2 pl-4 italic text-muted-foreground;
+  }
+
+  a {
+    @apply text-primary underline;
+  }
+
+  em {
+    @apply italic;
+  }
+
+  code {
+    @apply bg-muted text-muted-foreground rounded-md px-1 py-0.5;
+  }
+
+  pre {
+    @apply bg-muted text-muted-foreground rounded-md px-1 py-0.5;
+  }
+
+  img {
+    @apply max-w-full h-auto;
   }
 }
 
@@ -94,7 +167,7 @@
   --sidebar-ring: oklch(0.705 0.213 47.604);
 }
 
-.dark {
+[data-theme='dark'] {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.21 0.006 285.885);
