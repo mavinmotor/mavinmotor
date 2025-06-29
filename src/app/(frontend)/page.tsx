@@ -1,59 +1,25 @@
-import { headers as getHeaders } from 'next/headers.js'
+import { Button } from '@/components/ui/button'
+import { cn } from '@/utilities/utils'
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
-
-import config from '@/payload.config'
-import './styles.css'
+import * as React from 'react'
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
+    <div className='flex flex-col gap-5 mx-auto w-full'>
+      <section
+        className='fixed top-0 w-full flex flex-col mx-auto items-center justify-center h-screen gap-5 overflow-hidden'
+      >
+        <div className='flex flex-col items-center justify-center z-35 gap-3 md:max-w-xl text-center'>
+          <h2 className={cn('block text-lg md:text-3xl font-black uppercase')}>Quality and <span className='text-green-500 underline decoration-wavy rotate-[-130deg]'>Affordable</span> Agro Processing and Construction Machinery</h2>
+          <p className='text-sm font-light'>Over the years, Oduyah has grown from producing small scale milling equipment to being one of the region’s leading manufacturers and suppliers of agro-processing and  machinery.</p>
+
+          <div className='flex w-fit items-center gap-3 mt-10'>
+            <Button variant={'secondary'} className='h-20 w-45 rounded-full'>Read More</Button>
+            <Button className='h-20 w-45 rounded-full'>Contact us</Button>
+          </div>
         </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+      </section>
     </div>
   )
 }
