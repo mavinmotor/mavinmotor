@@ -7,6 +7,7 @@ import { CallToActionBlock } from '@/add-ons/CallToAction/Component'
 import { ContentBlock } from '@/add-ons/Content/Component'
 import { FormBlock } from '@/add-ons/Form/Component'
 import { MediaBlock } from '@/add-ons/MediaBlock/Component'
+import { MerchantBlock } from './MerchantBlock/Component'
 
 const blockComponents = {
     archive: ArchiveBlock,
@@ -14,6 +15,7 @@ const blockComponents = {
     cta: CallToActionBlock,
     formBlock: FormBlock,
     mediaBlock: MediaBlock,
+    merchant: MerchantBlock
 }
 
 export const RenderBlocks: React.FC<{

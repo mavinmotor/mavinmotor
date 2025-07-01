@@ -3,19 +3,20 @@
 import Link from 'next/link'
 import React, { Fragment } from 'react'
 
-import type { Post } from '@/payload-types'
+import type { Post, Product } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/utils'
 import useClickableCard from '@/utilities/useClickableCard'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardProductData = Pick<Product, 'slug' | 'categories' | 'meta' | 'title'>
 
 export const Card: React.FC<{
     alignItems?: 'center'
     className?: string
-    doc?: CardPostData
-    relationTo?: 'posts'
+    doc?: CardPostData | CardProductData
+    relationTo?: 'posts' | 'products'
     showCategories?: boolean
     title?: string
 }> = (props) => {

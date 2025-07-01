@@ -39,10 +39,7 @@ const columnFields: Field[] = [
         editor: lexicalEditor({
             features: ({ rootFeatures }) => {
                 return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
+                    ...rootFeatures
                 ]
             },
         }),

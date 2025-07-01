@@ -33,8 +33,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     }, [headerTheme])
 
     return (
-        <header className="sticky top-0 container z-20 backdrop-blur-3xl" {...(theme ? { 'data-theme': theme } : {})}>
-            <div className={'3xl:fixed:container flex h-16 items-center gap-2 **:data-[slot=separator]:!h-4'}>
+        <header className="sticky top-0 z-20 backdrop-blur-3xl" {...(theme ? { 'data-theme': theme } : {})}>
+            <div className={'container flex h-16 items-center gap-2 **:data-[slot=separator]:!h-4'}>
                 <div className={'flex gap-5 items-center'}>
                     <Link href="/">
                         <Logo loading="eager" priority="high" className="invert dark:invert-0" />

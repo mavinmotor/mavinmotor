@@ -17,6 +17,7 @@ import { FormBlock } from "@/add-ons/Form/config";
 import { hero } from "@/heros/config";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 import { populatePublishedAt } from "@/hooks/populatePublishedAt";
+import { Merchant } from "@/add-ons/MerchantBlock/config";
 
 export const Pages: CollectionConfig<'pages'> = {
     slug: 'pages',
@@ -53,7 +54,10 @@ export const Pages: CollectionConfig<'pages'> = {
         {
             name: 'title',
             type: 'text',
-            required: true
+            required: true,
+            admin: {
+                description: 'The title is basically the title of the page. (* Its a Required Field)'
+            }
         },
         {
             type: 'tabs',
@@ -67,7 +71,7 @@ export const Pages: CollectionConfig<'pages'> = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+                            blocks: [CallToAction, Merchant, Content, MediaBlock, Archive, FormBlock],
                             required: true,
                             admin: {
                                 initCollapsed: true,

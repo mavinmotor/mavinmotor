@@ -1,4 +1,5 @@
 import { slugField } from "@/fields/slug";
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
 
@@ -11,7 +12,10 @@ export const Products: CollectionConfig = {
         {
             name: 'title',
             type: 'text',
-            required: true
+            required: true,
+            admin: {
+                description: 'The title is basically the title of the page. (* Its a Required Field)'
+            }
         },
         {
             type: 'tabs',
@@ -23,11 +27,7 @@ export const Products: CollectionConfig = {
                             name: 'productImage',
                             type: 'upload',
                             relationTo: 'media',
-                            hasMany: true
-                        },
-                        {
-                            name: 'productName',
-                            type: 'text',
+                            hasMany: false
                         },
                         {
                             type: 'row',
@@ -58,9 +58,67 @@ export const Products: CollectionConfig = {
                     ]
                 },
                 {
+                    fields: [
+                        {
+                            name: 'relatedPosts',
+                            type: 'relationship',
+                            admin: {
+                                position: 'sidebar',
+                            },
+                            filterOptions: ({ id }) => {
+                                return {
+                                    id: {
+                                        not_in: [id],
+                                    },
+                                }
+                            },
+                            hasMany: true,
+                            relationTo: 'posts',
+                        },
+                        {
+                            name: 'categories',
+                            type: 'relationship',
+                            admin: {
+                                position: 'sidebar',
+                            },
+                            hasMany: true,
+                            relationTo: "categories",
+                        },
+                    ],
+                    label: 'Meta',
+                },
+                {
+                    name: 'meta',
                     label: 'SEO',
-                    fields: []
-                }
+                    fields: [
+                        OverviewField({
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description',
+                            imagePath: 'meta.image',
+                        }),
+                        MetaTitleField({
+                            hasGenerateFn: true,
+                        }),
+                        MetaImageField({
+                            relationTo: 'media',
+                        }),
+                        {
+                            name: 'keywords',
+                            type: "relationship",
+                            relationTo: 'keywords',
+                            hasMany: true
+                        },
+                        MetaDescriptionField({}),
+                        PreviewField({
+                            // if the `generateUrl` function is configured
+                            hasGenerateFn: true,
+
+                            // field paths to match the target field for data
+                            titlePath: 'meta.title',
+                            descriptionPath: 'meta.description',
+                        }),
+                    ],
+                },
             ]
         },
         ...slugField(),
