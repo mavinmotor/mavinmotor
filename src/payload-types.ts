@@ -495,6 +495,7 @@ export interface Product {
     keywords?: (string | Keyword)[] | null;
     description?: string | null;
   };
+  instock: number;
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
@@ -1364,6 +1365,7 @@ export interface ProductsSelect<T extends boolean = true> {
         keywords?: T;
         description?: T;
       };
+  instock?: T;
   slug?: T;
   slugLock?: T;
   updatedAt?: T;

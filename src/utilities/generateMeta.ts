@@ -1,21 +1,17 @@
 import type { Metadata } from 'next'
 
-import type { Media, Page, Post, Config } from '../payload-types'
+import type { Media, Page, Post, Config, Category } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
     const serverUrl = getServerSideURL()
-
     let url = serverUrl + '/website-template-OG.webp'
-
     if (image && typeof image === 'object' && 'url' in image) {
         const ogUrl = image.sizes?.og?.url
-
         url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
     }
-
     return url
 }
 
@@ -27,8 +23,26 @@ export const generateMeta = async (args: {
     const ogImage = getImageURL(doc?.meta?.image)
 
     const title = doc?.meta?.title
-        ? doc?.meta?.title + ' | Payload Website Template'
-        : 'Payload Website Template'
+        ? doc?.meta?.title
+        : 'Empty title'
+
+    const getKeywordsTitles = (doc: any): string[] => {
+        const keywordsType: (string | Category)[] = doc?.meta?.keywords || []
+
+        if (Array.isArray(keywordsType)) {
+            return keywordsType
+                .map((keywrd) => {
+                    if (typeof keywrd === 'object' && keywrd !== null && 'title' in keywrd) {
+                        return (keywrd as Category).title
+                    }
+                    return String(keywrd) // Handles cases where it might be a string directly
+                })
+                .filter((title) => title !== null && title !== undefined) // Filter out any undefined/null titles
+        }
+        return []
+    }
+
+    const keywords = getKeywordsTitles(doc)
 
     return {
         description: doc?.meta?.description,
@@ -45,5 +59,6 @@ export const generateMeta = async (args: {
             url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
         }),
         title,
+        keywords: keywords,
     }
 }

@@ -1,19 +1,14 @@
 import React from 'react'
 
-import type { Post, Product } from '@/payload-types'
+import type { Product } from '@/payload-types'
 
 import { Media } from '@/components/Media'
-import { formatAuthors } from '@/utilities/formatAuthors'
 import { formatDateTime } from '@/utilities/formatDateTime'
 
-export const PostHero: React.FC<{
-    post: Post
-}> = ({ post }) => {
-    const { categories, heroImage, populatedAuthors, publishedAt, title } = post
-
-
-    const hasAuthors =
-        populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
+export const ProductHero: React.FC<{
+    product: Product
+}> = ({ product }) => {
+    const { categories, productImage, instock, updatedAt, title } = product
 
     return (
         <div className="relative -mt-[10.4rem] flex items-end">
@@ -44,30 +39,21 @@ export const PostHero: React.FC<{
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-4 md:gap-16">
-                        {hasAuthors && (
-                            <div className="flex flex-col gap-4">
-                                <div className="flex flex-col gap-1">
-                                    <p className="text-sm">Author</p>
-
-                                    <p>{formatAuthors(populatedAuthors)}</p>
-                                </div>
-                            </div>
-                        )}
-                        {publishedAt && (
+                        {updatedAt && (
                             <div className="flex flex-col gap-1">
                                 <p className="text-sm">Date Published</p>
 
-                                <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
+                                <time dateTime={updatedAt}>{formatDateTime(updatedAt)}</time>
                             </div>
                         )}
                     </div>
                 </div>
             </div>
             <div className="min-h-[80vh] select-none">
-                {heroImage && typeof heroImage !== 'string' && (
-                    <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
+                {productImage && typeof productImage !== 'string' && (
+                    <Media fill priority imgClassName="-z-10" resource={productImage} />
                 )}
-                <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
+                <div className="absolute pointer-events-none left-0 bottom-0 w-full h-5/6 bg-gradient-to-t from-background to-transparent" />
             </div>
         </div>
     )

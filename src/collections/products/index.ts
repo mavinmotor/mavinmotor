@@ -8,6 +8,9 @@ export const Products: CollectionConfig = {
     admin: {
         group: 'Management'
     },
+    access: {
+        read: () => true
+    },
     fields: [
         {
             name: 'title',
@@ -120,6 +123,15 @@ export const Products: CollectionConfig = {
                     ],
                 },
             ]
+        },
+        {
+            name: 'instock',
+            type: 'number',
+            required: true,
+            defaultValue: 0,
+            admin: {
+                position: 'sidebar'
+            }
         },
         ...slugField(),
     ],

@@ -59,7 +59,7 @@ export const MerchantBlock: React.FC<
                     <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
                 </div>
             )}
-            <CollectionArchive posts={products} />
+            <CollectionArchive products={products} />
         </div>
     )
 }

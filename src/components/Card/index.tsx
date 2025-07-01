@@ -39,9 +39,9 @@ export const Card: React.FC<{
             )}
             ref={card.ref}
         >
-            <div className="relative w-full ">
+            <div className="relative w-full">
                 {!metaImage && <div className="">No image</div>}
-                {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+                {metaImage && typeof metaImage !== 'string' && <Media imgClassName='aspect-video rounded-lg shadow' resource={metaImage} size="33vw" />}
             </div>
             <div className="p-4">
                 {showCategories && hasCategories && (
@@ -73,13 +73,13 @@ export const Card: React.FC<{
                 {titleToUse && (
                     <div className="prose">
                         <h3>
-                            <Link className="not-prose" href={href} ref={link.ref}>
+                            <Link className="not-prose font-bold" href={href} ref={link.ref}>
                                 {titleToUse}
                             </Link>
                         </h3>
                     </div>
                 )}
-                {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+                {description && <div className="mt-2 text-sm font-light line-clamp-3">{description && <p>{sanitizedDescription}</p>}</div>}
             </div>
         </article>
     )
