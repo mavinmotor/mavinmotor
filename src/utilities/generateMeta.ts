@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import type { Media, Page, Post, Config, Category } from '../payload-types'
+import type { Media, Page, Post, Config, Keyword } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
@@ -27,13 +27,13 @@ export const generateMeta = async (args: {
         : 'Empty title'
 
     const getKeywordsTitles = (doc: any): string[] => {
-        const keywordsType: (string | Category)[] = doc?.meta?.keywords || []
+        const keywordsType: (string | Keyword)[] = doc?.meta?.keywords || []
 
         if (Array.isArray(keywordsType)) {
             return keywordsType
                 .map((keywrd) => {
                     if (typeof keywrd === 'object' && keywrd !== null && 'title' in keywrd) {
-                        return (keywrd as Category).title
+                        return (keywrd as Keyword).title
                     }
                     return String(keywrd) // Handles cases where it might be a string directly
                 })

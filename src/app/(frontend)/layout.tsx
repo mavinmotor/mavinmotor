@@ -9,11 +9,10 @@ import { draftMode } from 'next/headers';
 import { AdminBar } from '@/components/AdminBar';
 import { Providers } from '@/components/theme-provider';
 import { Header } from '@/preferences/header/Component';
-
-export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
-}
+import { Footer } from '@/preferences/footer/Component';
+import { Metadata } from 'next';
+import { getServerSideURL } from '@/utilities/getURL';
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph';
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
@@ -42,9 +41,19 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
           <Header />
           <div className='flex-1'>{children}</div>
-          {/** <Footer /> */}
+          <Footer />
         </Providers>
       </body>
     </html>
   )
+}
+
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getServerSideURL()),
+  openGraph: mergeOpenGraph(),
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@example',
+  },
 }

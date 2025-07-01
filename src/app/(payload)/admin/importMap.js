@@ -34,6 +34,7 @@ import { FolderEditField as FolderEditField_ab83ff7e88da8d3530831f296ec4756a } f
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { ReindexButton as ReindexButton_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
 import { RowLabel as RowLabel_6d8a3d69ee0c4e9f5ee84f107168d194 } from '@/preferences/header/RowLabel'
+import { RowLabel as RowLabel_97cbc18aeba8a9828f0d2e1965275e88 } from '@/preferences/footer/RowLabel'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -71,5 +72,6 @@ export const importMap = {
   "@payloadcms/ui/rsc#FolderEditField": FolderEditField_ab83ff7e88da8d3530831f296ec4756a,
   "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
   "@payloadcms/plugin-search/client#ReindexButton": ReindexButton_aead06e4cbf6b2620c5c51c9ab283634,
-  "@/preferences/header/RowLabel#RowLabel": RowLabel_6d8a3d69ee0c4e9f5ee84f107168d194
+  "@/preferences/header/RowLabel#RowLabel": RowLabel_6d8a3d69ee0c4e9f5ee84f107168d194,
+  "@/preferences/footer/RowLabel#RowLabel": RowLabel_97cbc18aeba8a9828f0d2e1965275e88
 }
