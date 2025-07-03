@@ -23,7 +23,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang={"en"} suppressHydrationWarning>
       <head>
         <InitTheme />
-        {/** to add here other window detections for response */}
+        {/** other window detections for response */}
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
