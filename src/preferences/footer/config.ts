@@ -2,7 +2,6 @@ import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Footer: GlobalConfig = {
     slug: 'footer',
@@ -14,37 +13,31 @@ export const Footer: GlobalConfig = {
     },
     fields: [
         {
-            name: 'intro',
-            type: 'richText',
-            editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                    return [
-                        ...rootFeatures
-                    ]
-                },
-            }),
-        },
-        {
-            name: 'navItems',
+            name: 'columns',
             type: 'array',
             fields: [
-                link({
-                    appearances: false,
-                }),
-            ],
-            maxRows: 6,
-            admin: {
-                initCollapsed: true,
-                components: {
-                    RowLabel: '@/preferences/footer/RowLabel#RowLabel',
+                {
+                    name: 'label',
+                    type: 'text',
+                    required: true,
                 },
-            },
+                {
+                    name: 'navItems',
+                    type: 'array',
+                    fields: [
+                        link({
+                            appearances: false,
+                        }),
+                    ],
+                },
+            ],
+            maxRows: 3,
+            minRows: 1,
         },
         {
-            name: 'copyright',
+            name: 'copyRight',
             type: 'text',
             admin: {
-                description: 'The copyright of the website presented at the bottom of the footer eg: Copyright © 2025 company name or bussiness name',
                 position: 'sidebar'
             }
         }

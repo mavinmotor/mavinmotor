@@ -28,21 +28,23 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
 
-      <body className={cn(
-        "min-h-screen bg-background font-sans antialiased",
-        sans.variable, mono.variable
-      )}
+      <body
+        className={cn(
+          'relative isolate min-h-screen bg-background font-sans antialiased',
+          `${sans.variable} ${mono.variable} antialiased`,
+        )}
       >
         <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-
-          <Header />
-          <div className='flex-1'>{children}</div>
-          <Footer />
+          <main className={cn('relative flex flex-col min-h-screen')}>
+            <AdminBar
+              adminBarProps={{
+                preview: isEnabled,
+              }}
+            />
+            <Header />
+            <div className={'flex-1'}>{children}</div>
+            <Footer />
+          </main>
         </Providers>
       </body>
     </html>
