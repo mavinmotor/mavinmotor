@@ -7,10 +7,18 @@ import { revalidateDelete, revalidateProducts } from "./hooks/revalidateProducts
 export const Products: CollectionConfig = {
     slug: 'products',
     admin: {
-        group: 'Management'
+        group: 'Management',
+        useAsTitle: 'title'
     },
     access: {
         read: () => true
+    },
+    folders: {
+        browseByFolder: true,
+
+    },
+    forceSelect: {
+        title: true
     },
     fields: [
         {
