@@ -8,6 +8,8 @@ import type { Post, Product } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/utils'
 import useClickableCard from '@/utilities/useClickableCard'
+import { Badge } from '../ui/badge'
+import { Button } from '../ui/button'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 export type CardProductData = Pick<Product, 'slug' | 'categories' | 'meta' | 'title'>
@@ -42,20 +44,24 @@ export const Card: React.FC<{
             <div className="relative w-full">
                 {!metaImage && <div className="">No image</div>}
                 {metaImage && typeof metaImage !== 'string' && <Media imgClassName='aspect-video rounded-lg shadow' resource={metaImage} size="33vw" />}
+                {relationTo == "products" &&
+                    <div className='absolute flex gap-2 top-1 right-1 z-5'>
+                        <span className='flex shadow text-xs gap-2 items-center bg-muted backdrop-blur-3xl rounded-md px-[4.8px] py-1'><Badge>8</Badge> In stroke</span>
+                        <Badge>12,000 UGX</Badge>
+                    </div>
+                }
             </div>
-            <div className="p-4">
+
+            <div className="px-4 pt-4">
                 {showCategories && hasCategories && (
-                    <div className="uppercase text-sm mb-4">
+                    <div className="uppercase text-sm mb-2">
                         {showCategories && hasCategories && (
                             <div>
                                 {categories?.map((category, index) => {
                                     if (typeof category === 'object') {
                                         const { title: titleFromCategory } = category
-
                                         const categoryTitle = titleFromCategory || 'Untitled category'
-
                                         const isLast = index === categories.length - 1
-
                                         return (
                                             <Fragment key={index}>
                                                 {categoryTitle}
@@ -63,7 +69,6 @@ export const Card: React.FC<{
                                             </Fragment>
                                         )
                                     }
-
                                     return null
                                 })}
                             </div>
@@ -71,7 +76,7 @@ export const Card: React.FC<{
                     </div>
                 )}
                 {titleToUse && (
-                    <div className="prose">
+                    <div className="flex">
                         <h3>
                             <Link className="not-prose font-bold" href={href} ref={link.ref}>
                                 {titleToUse}
@@ -79,7 +84,11 @@ export const Card: React.FC<{
                         </h3>
                     </div>
                 )}
-                {description && <div className="mt-2 text-sm font-light line-clamp-3">{description && <p>{sanitizedDescription}</p>}</div>}
+                {description && <div className="text-sm font-light line-clamp-3 text-secondary-foreground/85">{description && <p>{sanitizedDescription}</p>}</div>}
+                <div className='flex items-center justify-between mt-3'>
+                    <Link href={href}><Badge variant={'secondary'} >MORE DETAILS..</Badge></Link>
+                    <Link href={'/contact-us'}><Badge className='bg-green-500 text-secondary-foreground'>PURCHASE</Badge></Link>
+                </div>
             </div>
         </article>
     )

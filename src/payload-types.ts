@@ -411,9 +411,17 @@ export interface Product {
    * The title is basically the title of the page. (* Its a Required Field)
    */
   title: string;
+  /**
+   * The Product Image is a poster image meant to represnet how the product looks like in a small screen preview
+   */
   productImage?: (string | null) | Media;
-  price?: string | null;
-  currency?: ('UGX' | 'USD' | 'KES') | null;
+  quotation?:
+    | {
+        price?: string | null;
+        currency?: ('UGX' | 'USD' | 'KES') | null;
+        id?: string | null;
+      }[]
+    | null;
   productDetails: {
     root: {
       type: string;
@@ -434,9 +442,12 @@ export interface Product {
   meta?: {
     title?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * The Open Graph (OG) image and Twitter Card image provide a visual representation of your page or post when shared on social media platforms and in search results (though less directly for Google`s main SERP, it`s crucial for discovery on social channels). These images act as a `cover` for your content, helping to attract clicks and convey the essence of the page before a user even visits.
      */
     image?: (string | null) | Media;
+    /**
+     * Keywords are the specific words and phrases users type into search engines. Optimizing your content with relevant keywords helps search engines understand what your content is about, enabling it to appear in relevant search results when users are looking for information, products, or services that match your offerings.
+     */
     keywords?: (string | Keyword)[] | null;
     description?: string | null;
   };
@@ -1368,8 +1379,13 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   productImage?: T;
-  price?: T;
-  currency?: T;
+  quotation?:
+    | T
+    | {
+        price?: T;
+        currency?: T;
+        id?: T;
+      };
   productDetails?: T;
   relatedPosts?: T;
   categories?: T;
