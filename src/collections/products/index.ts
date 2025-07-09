@@ -2,6 +2,7 @@ import { slugField } from "@/fields/slug";
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
+import { revalidateDelete, revalidateProducts } from "./hooks/revalidateProducts";
 
 export const Products: CollectionConfig = {
     slug: 'products',
@@ -37,11 +38,25 @@ export const Products: CollectionConfig = {
                             fields: [
                                 {
                                     name: 'price',
-                                    type: 'number'
+                                    type: 'text',
                                 },
                                 {
                                     name: 'currency',
-                                    type: 'text',
+                                    type: 'select',
+                                    options: [
+                                        {
+                                            label: "UGANDAN SHILLINGS",
+                                            value: "UGX"
+                                        },
+                                        {
+                                            label: "UNITED STATES DOLLAR",
+                                            value: "USD"
+                                        },
+                                        {
+                                            label: "KENYAN SHILLINGS",
+                                            value: "KES"
+                                        },
+                                    ]
                                 }
                             ]
                         },
@@ -135,6 +150,10 @@ export const Products: CollectionConfig = {
         },
         ...slugField(),
     ],
+    hooks: {
+        afterChange: [revalidateProducts],
+        afterDelete: [revalidateDelete],
+    },
     versions: {
         drafts: {
             autosave: {
