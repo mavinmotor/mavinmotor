@@ -15,12 +15,12 @@ export const Email: React.FC<
   }
 > = ({ name, defaultValue, errors, label, register, required, width }) => {
   return (
-    <Width width={width}>
-      <Label htmlFor={name}>
+    <Width width={width} className='grid gap-2'>
+      <Label htmlFor={name} className='flex items-center font-bold'>
         {label}
 
         {required && (
-          <span className="required">
+          <span className="required text-destructive">
             * <span className="sr-only">(required)</span>
           </span>
         )}
@@ -29,6 +29,7 @@ export const Email: React.FC<
         defaultValue={defaultValue}
         id={name}
         type="text"
+        className='rounded-sm py-6 backdrop-blur-3xl border-0'
         {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
       />
 

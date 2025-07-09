@@ -30,9 +30,9 @@ export const Checkbox: React.FC<
             setValue(props.name, checked)
           }}
         />
-        <Label htmlFor={name}>
+        <Label htmlFor={name} className='flex items-center font-bold'>
           {required && (
-            <span className="required">
+            <span className="required text-destructive">
               * <span className="sr-only">(required)</span>
             </span>
           )}

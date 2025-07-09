@@ -51,6 +51,9 @@ export default buildConfig({
         },
       ],
     },
+    meta: {
+      titleSuffix: '- Mavin Motor'
+    }
   },
   collections: [Pages, Posts, Products, Keywords, Categories, Users, Media],
   globals: [Header, Footer],
