@@ -2,14 +2,14 @@ import clsx from 'clsx'
 import React from 'react'
 import RichText from '@/components/RichText'
 
-import type { Post } from '@/payload-types'
+import type { Post, Product } from '@/payload-types'
 
 import { Card } from '../../components/Card'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 export type RelatedPostsProps = {
     className?: string
-    docs?: Post[]
+    docs?: Post[] | Product[]
     introContent?: SerializedEditorState
 }
 

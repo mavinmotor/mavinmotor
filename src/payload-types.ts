@@ -437,7 +437,7 @@ export interface Product {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
+  relatedPosts?: (string | Product)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
@@ -451,7 +451,6 @@ export interface Product {
     keywords?: (string | Keyword)[] | null;
     description?: string | null;
   };
-  instock: number;
   slug?: string | null;
   slugLock?: boolean | null;
   folder?: (string | null) | FolderInterface;
@@ -1397,7 +1396,6 @@ export interface ProductsSelect<T extends boolean = true> {
         keywords?: T;
         description?: T;
       };
-  instock?: T;
   slug?: T;
   slugLock?: T;
   folder?: T;

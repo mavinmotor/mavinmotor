@@ -108,7 +108,7 @@ export const Products: CollectionConfig = {
                                 }
                             },
                             hasMany: true,
-                            relationTo: 'posts',
+                            relationTo: "products",
                         },
                         {
                             name: 'categories',
@@ -163,15 +163,6 @@ export const Products: CollectionConfig = {
                     ],
                 },
             ]
-        },
-        {
-            name: 'instock',
-            type: 'number',
-            required: true,
-            defaultValue: 0,
-            admin: {
-                position: 'sidebar'
-            }
         },
         ...slugField(),
     ],
