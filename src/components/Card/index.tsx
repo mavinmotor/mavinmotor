@@ -38,12 +38,13 @@ export const Card: React.FC<{
             className={cn(
                 'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
                 className,
+                relationTo == "products" && 'border-0 touch-auto shadow-2xl backdrop-blur-3xl h-fit hover:scale-105 delay-75'
             )}
             ref={card.ref}
         >
             <div className="relative w-full">
                 {!metaImage && <div className="">No image</div>}
-                {metaImage && typeof metaImage !== 'string' && <Media imgClassName='aspect-video rounded-lg shadow' resource={metaImage} size="33vw" />}
+                {metaImage && typeof metaImage !== 'string' && <Media priority imgClassName='aspect-video rounded-lg shadow' resource={metaImage} size="33vw" />}
                 {relationTo == "products" &&
                     <div className='absolute flex gap-2 top-1 right-1 z-5'>
                         <span className='flex shadow text-xs gap-2 items-center bg-muted backdrop-blur-3xl rounded-md px-[4.8px] py-1'><Badge>8</Badge> In stroke</span>
@@ -52,7 +53,7 @@ export const Card: React.FC<{
                 }
             </div>
 
-            <div className="px-4 pt-4">
+            <div className="px-4 pt-4 pb-4 h-fit">
                 {showCategories && hasCategories && (
                     <div className="uppercase text-sm mb-2">
                         {showCategories && hasCategories && (
