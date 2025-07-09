@@ -45,6 +45,13 @@ export const Posts: CollectionConfig = {
             }),
         useAsTitle: 'title',
     },
+    folders: {
+        browseByFolder: true,
+
+    },
+    forceSelect: {
+        title: true
+    },
     fields: [
         {
             name: 'title',
