@@ -39,7 +39,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                             {links.map(({ link }, i) => {
                                 return (
                                     <li key={i}>
-                                        <CMSLink {...link} className='rounded-none md:px-9 h-12 [&>link]:bg-muted/55' />
+                                        <CMSLink {...link} className='rounded-none md:px-9 h-12 text-secondary-foreground' />
                                     </li>
                                 )
                             })}
@@ -51,7 +51,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                 {media && typeof media === 'object' && (
                     <Media fill className="size-full" imgClassName="-z-10 object-cover" priority resource={media} />
                 )}
-                <div className="absolute pointer-events-none left-0 bottom-0 w-full h-5/6 bg-gradient-to-t from-background to-transparent" />
+                <div className="absolute pointer-events-none left-0 bottom-0 w-full h-5/6 bg-gradient-to-t from-white dark:from-background to-transparent" />
             </div>
         </div >
     )

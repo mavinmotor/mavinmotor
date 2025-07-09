@@ -22,10 +22,6 @@ export const generateMeta = async (args: {
 
     const ogImage = getImageURL(doc?.meta?.image)
 
-    const title = doc?.meta?.title
-        ? doc?.meta?.title
-        : 'Empty title'
-
     const getKeywordsTitles = (doc: any): string[] => {
         const keywordsType: (string | Keyword)[] = doc?.meta?.keywords || []
 
@@ -55,10 +51,10 @@ export const generateMeta = async (args: {
                     },
                 ]
                 : undefined,
-            title,
+            title: doc?.meta?.title || 'Empty',
             url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
         }),
-        title,
+        title: doc?.meta?.title || 'Empty',
         keywords: keywords,
     }
 }
