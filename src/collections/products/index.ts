@@ -164,15 +164,6 @@ export const Products: CollectionConfig = {
                 },
             ]
         },
-        {
-            name: 'instock',
-            type: 'number',
-            required: true,
-            defaultValue: 0,
-            admin: {
-                position: 'sidebar'
-            }
-        },
         ...slugField(),
     ],
     hooks: {

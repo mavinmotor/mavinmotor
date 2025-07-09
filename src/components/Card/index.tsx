@@ -45,17 +45,11 @@ export const Card: React.FC<{
             <div className="relative w-full">
                 {!metaImage && <div className="">No image</div>}
                 {metaImage && typeof metaImage !== 'string' && <Media priority imgClassName='aspect-video rounded-lg shadow' resource={metaImage} size="33vw" />}
-                {relationTo == "products" &&
-                    <div className='absolute flex gap-2 top-1 right-1 z-5'>
-                        <span className='flex shadow text-xs gap-2 items-center bg-muted backdrop-blur-3xl rounded-md px-[4.8px] py-1'><Badge>8</Badge> In stroke</span>
-                        <Badge>12,000 UGX</Badge>
-                    </div>
-                }
             </div>
 
-            <div className="px-4 pt-4 pb-4 h-fit">
+            <div className="px-2 pt-4 pb-4 h-fit">
                 {showCategories && hasCategories && (
-                    <div className="uppercase text-sm mb-2">
+                    <div className="uppercase text-xs mb-2">
                         {showCategories && hasCategories && (
                             <div>
                                 {categories?.map((category, index) => {
@@ -85,8 +79,8 @@ export const Card: React.FC<{
                         </h3>
                     </div>
                 )}
-                {description && <div className="text-sm font-light line-clamp-3 text-secondary-foreground/85">{description && <p>{sanitizedDescription}</p>}</div>}
-                <div className='flex items-center justify-between mt-3'>
+                {description && <div className="text-xs md:text-sm font-light line-clamp-2 md:line-clamp-3 text-secondary-foreground/85">{description && <p>{sanitizedDescription}</p>}</div>}
+                <div className='flex flex-col md:flex-row items-center justify-between mt-3'>
                     <Link href={href}><Badge variant={'secondary'} >MORE DETAILS..</Badge></Link>
                     <Link href={'/contact-us'}><Badge className='bg-green-500 text-secondary-foreground'>PURCHASE</Badge></Link>
                 </div>
