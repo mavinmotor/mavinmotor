@@ -108,7 +108,7 @@ export const Products: CollectionConfig = {
                                 }
                             },
                             hasMany: true,
-                            relationTo: 'posts',
+                            relationTo: "products",
                         },
                         {
                             name: 'categories',

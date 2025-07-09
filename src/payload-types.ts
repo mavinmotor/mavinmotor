@@ -437,7 +437,7 @@ export interface Product {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
+  relatedPosts?: (string | Product)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
