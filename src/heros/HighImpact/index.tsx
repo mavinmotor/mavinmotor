@@ -18,23 +18,28 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
     return (
         <div
-            className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+            className="relative -mt-[10.4rem] flex items-center justify-center overflow-hidden"
             data-theme="dark"
         >
             <div className="container mb-8 z-10 relative flex items-center justify-center">
-                <div className="max-w-[36.5rem] md:text-center">
-                    {richText && <RichText className={cn(
-                        'mb-6',
-                        '[&>h1]:text-shadow-xs [&>h1]:text-3xl [&>h1]:text-shadow-amber-400 [&>h1]:dark:text-shadow-amber-200',
-                        '[&>p]:mt-1 [&>p]:max-w-2xl [&>p]:text-lg [&>p]:text-muted-foreground text-shadow-2xs',
-                    )} data={richText} enableGutter={false} />}
+                <div className="md:max-w-[66.5rem] md:text-center">
+                    {richText && (
+                        <RichText
+                            className={cn(
+                                'mb-6',
+                                '[&>h1]:text-shadow-xs [&>h1]:font-black [&>h1]:text-3xl [&>h1]:md:text-5xl [&>h1:last-of-type]:text-amber-500',
+                                '[&>p]:mt-1 [&>p]:max-w-2xl [&>p]:text-lg [&>p]:md:text-xl [&>p]:text-secondary-foreground/95 text-shadow-2xs',
+                            )}
+                            data={richText}
+                            enableGutter={false}
+                        />
+                    )}
                     {Array.isArray(links) && links.length > 0 && (
                         <ul className="flex md:justify-center gap-4">
                             {links.map(({ link }, i) => {
-
                                 return (
                                     <li key={i}>
-                                        <CMSLink {...link} />
+                                        <CMSLink {...link} className='rounded-none md:px-9 h-12 [&>link]:bg-muted/55' />
                                     </li>
                                 )
                             })}
@@ -42,7 +47,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
                     )}
                 </div>
             </div>
-            <div className="min-h-[80vh] select-none">
+            <div className="min-h-[80vh] select-none overflow-hidden">
                 {media && typeof media === 'object' && (
                     <Media fill className="size-full" imgClassName="-z-10 object-cover" priority resource={media} />
                 )}

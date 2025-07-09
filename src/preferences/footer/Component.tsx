@@ -15,7 +15,7 @@ export async function Footer() {
     const copyright = footerData?.copyRight
 
     return (
-        <footer className="mt-auto border-t border-border bg-background">
+        <footer className="mt-auto border-t border-border bg-background overflow-hidden">
             <div className="container mx-auto">
                 <div className="flex flex-col gap-8 md:gap-12 py-8 md:py-12">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6">

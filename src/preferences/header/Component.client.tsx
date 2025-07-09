@@ -10,7 +10,6 @@ import type { Header } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { useHeaderTheme } from '@/components/theme-provider/headertheme'
-import { EndNav } from './NavEnd'
 
 interface HeaderClientProps {
     data: Header
@@ -34,14 +33,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
     return (
         <header className="sticky top-0 z-20 backdrop-blur-3xl" {...(theme ? { 'data-theme': theme } : {})}>
-            <div className={'container flex h-16 items-center gap-2 **:data-[slot=separator]:!h-4'}>
+            <div className={'container flex items-center justify-between h-16 gap-2'}>
                 <div className={'flex gap-5 items-center'}>
                     <Link href="/">
                         <Logo loading="eager" priority="high" className="invert-0 dark:invert" />
                     </Link>
-                    <HeaderNav data={data} />
                 </div>
-                <EndNav />
+                <HeaderNav data={data} />
             </div>
         </header>
     )

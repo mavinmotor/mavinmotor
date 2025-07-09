@@ -16,12 +16,12 @@ export const Textarea: React.FC<
   }
 > = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
   return (
-    <Width width={width}>
-      <Label htmlFor={name}>
+    <Width width={width} className='grid gap-2'>
+      <Label htmlFor={name} className='flex items-center font-bold'>
         {label}
 
         {required && (
-          <span className="required">
+          <span className="required text-destructive">
             * <span className="sr-only">(required)</span>
           </span>
         )}
@@ -31,6 +31,8 @@ export const Textarea: React.FC<
         defaultValue={defaultValue}
         id={name}
         rows={rows}
+        minLength={200}
+        className='rounded-sm min-h-[8rem] border-0 backdrop-blur-3xl'
         {...register(name, { required: required })}
       />
 
