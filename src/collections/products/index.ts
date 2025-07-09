@@ -39,33 +39,42 @@ export const Products: CollectionConfig = {
                             name: 'productImage',
                             type: 'upload',
                             relationTo: 'media',
-                            hasMany: false
+                            hasMany: false,
+                            admin: {
+                                description: 'The Product Image is a poster image meant to represnet how the product looks like in a small screen preview'
+                            }
                         },
                         {
-                            type: 'row',
+                            name: 'quotation',
+                            type: 'array',
                             fields: [
                                 {
-                                    name: 'price',
-                                    type: 'text',
-                                },
-                                {
-                                    name: 'currency',
-                                    type: 'select',
-                                    options: [
+                                    type: 'row',
+                                    fields: [
                                         {
-                                            label: "UGANDAN SHILLINGS",
-                                            value: "UGX"
+                                            name: 'price',
+                                            type: 'text',
                                         },
                                         {
-                                            label: "UNITED STATES DOLLAR",
-                                            value: "USD"
-                                        },
-                                        {
-                                            label: "KENYAN SHILLINGS",
-                                            value: "KES"
-                                        },
+                                            name: 'currency',
+                                            type: 'select',
+                                            options: [
+                                                {
+                                                    label: "UGANDAN SHILLINGS",
+                                                    value: "UGX"
+                                                },
+                                                {
+                                                    label: "UNITED STATES DOLLAR",
+                                                    value: "USD"
+                                                },
+                                                {
+                                                    label: "KENYAN SHILLINGS",
+                                                    value: "KES"
+                                                },
+                                            ]
+                                        }
                                     ]
-                                }
+                                },
                             ]
                         },
                         {
@@ -127,12 +136,20 @@ export const Products: CollectionConfig = {
                         }),
                         MetaImageField({
                             relationTo: 'media',
+                            overrides: {
+                                admin: {
+                                    description: 'The Open Graph (OG) image and Twitter Card image provide a visual representation of your page or post when shared on social media platforms and in search results (though less directly for Google`s main SERP, it`s crucial for discovery on social channels). These images act as a `cover` for your content, helping to attract clicks and convey the essence of the page before a user even visits.'
+                                }
+                            }
                         }),
                         {
                             name: 'keywords',
                             type: "relationship",
                             relationTo: 'keywords',
-                            hasMany: true
+                            hasMany: true,
+                            admin: {
+                                description: 'Keywords are the specific words and phrases users type into search engines. Optimizing your content with relevant keywords helps search engines understand what your content is about, enabling it to appear in relevant search results when users are looking for information, products, or services that match your offerings.'
+                            }
                         },
                         MetaDescriptionField({}),
                         PreviewField({
