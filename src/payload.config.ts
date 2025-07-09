@@ -52,7 +52,11 @@ export default buildConfig({
       ],
     },
     meta: {
-      titleSuffix: '- Mavin Motor'
+      titleSuffix: '- Mavin Motor',
+      icons: {
+        icon: "/favicon.svg",
+        apple: "/favicon.svg"
+      }
     }
   },
   collections: [Pages, Posts, Products, Keywords, Categories, Users, Media],

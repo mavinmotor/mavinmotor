@@ -36,6 +36,14 @@ export default async function Page() {
                 </div>
             </div>
 
+            <CollectionArchive products={products.docs} />
+
+            <div className="container">
+                {products.totalPages > 1 && products.page && (
+                    <Pagination page={products.page} totalPages={products.totalPages} />
+                )}
+            </div>
+
             <div className="container mb-8">
                 <PageRange
                     collection={'products'}
@@ -43,14 +51,6 @@ export default async function Page() {
                     limit={12}
                     totalDocs={products.totalDocs}
                 />
-            </div>
-
-            <CollectionArchive products={products.docs} />
-
-            <div className="container">
-                {products.totalPages > 1 && products.page && (
-                    <Pagination page={products.page} totalPages={products.totalPages} />
-                )}
             </div>
         </div>
     )

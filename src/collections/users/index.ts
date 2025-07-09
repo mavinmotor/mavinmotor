@@ -7,6 +7,9 @@ export const Users: CollectionConfig = {
     group: 'Storage & Auth'
   },
   auth: true,
+  access: {
+    read: () => true
+  },
   fields: [
     {
       name: 'role',

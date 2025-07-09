@@ -20,6 +20,9 @@ export const Posts: CollectionConfig = {
             description: true,
         },
     },
+    access: {
+        read: () => true
+    },
     admin: {
         group: 'Management',
         defaultColumns: ['title', 'slug', 'updatedAt'],
