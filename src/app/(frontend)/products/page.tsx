@@ -8,6 +8,10 @@ import React from 'react'
 import PageClient from './page.client'
 import { PageRange } from '@/components/PageRange'
 import { Search } from '@/search/Component'
+import Link from 'next/link'
+import { cn } from '@/utilities/utils'
+import { buttonVariants } from '@/components/ui/button'
+import { SearchIcon } from 'lucide-react'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
@@ -34,7 +38,16 @@ export default async function Page() {
             <div className="container mb-10 md:mb-16">
                 <div className="flex flex-col gap-3 md:flex-row items-start md:items-center md:justify-between prose dark:prose-invert max-w-none">
                     <h1 className='text-3xl font-bold'>PRODUCTS PLACE</h1>
-                    <Search routeType={"products"} className='w-full md:max-w-lg' />
+
+                    <Link href="/search" className={cn(
+                        buttonVariants({
+                            variant: 'secondary',
+                            size: 'lg'
+                        }),
+                        'flex items-center'
+                    )}>
+                        Search Products...  <SearchIcon />
+                    </Link>
                 </div>
             </div>
 
@@ -42,7 +55,7 @@ export default async function Page() {
 
             <div className="container">
                 {products.totalPages > 1 && products.page && (
-                    <Pagination page={products.page} totalPages={products.totalPages} />
+                    <Pagination slug={'products'} page={products.page} totalPages={products.totalPages} />
                 )}
             </div>
 

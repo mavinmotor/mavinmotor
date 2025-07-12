@@ -37,6 +37,13 @@ export const searchFields: Field[] = [
         ],
     },
     {
+        name: 'relationTo',
+        type: 'text',
+        admin: {
+            readOnly: true
+        }
+    },
+    {
         label: 'Categories',
         name: 'categories',
         type: 'array',

@@ -8,6 +8,11 @@ import React from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
 import { PageRange } from '@/components/PageRange'
+import { Search } from '@/search/Component'
+import Link from 'next/link'
+import { cn } from '@/utilities/utils'
+import { buttonVariants } from '@/components/ui/button'
+import { SearchIcon } from 'lucide-react'
 
 export const revalidate = 600
 
@@ -36,10 +41,27 @@ export default async function Page({ params: paramsPromise }: Args) {
     return (
         <div className="pt-24 pb-24">
             <PageClient />
-            <div className="container mb-16">
-                <div className="prose dark:prose-invert max-w-none">
-                    <h1>Posts</h1>
+            <div className="container mb-10 md:mb-16">
+                <div className="flex flex-col gap-3 md:flex-row items-start md:items-center md:justify-between prose dark:prose-invert max-w-none">
+                    <h1 className='text-3xl font-bold'>PRODUCTS PLACE</h1>
+                    <Link href="/search" className={cn(
+                        buttonVariants({
+                            variant: 'secondary',
+                            size: 'lg'
+                        }),
+                        'flex items-center'
+                    )}>
+                        Search Products...  <SearchIcon />
+                    </Link>
                 </div>
+            </div>
+
+            <CollectionArchive products={products.docs} />
+
+            <div className="container">
+                {products?.page && products?.totalPages > 1 && (
+                    <Pagination slug={'products'} page={products.page} totalPages={products.totalPages} />
+                )}
             </div>
 
             <div className="container mb-8">
@@ -49,14 +71,6 @@ export default async function Page({ params: paramsPromise }: Args) {
                     limit={12}
                     totalDocs={products.totalDocs}
                 />
-            </div>
-
-            <CollectionArchive products={products.docs} />
-
-            <div className="container">
-                {products?.page && products?.totalPages > 1 && (
-                    <Pagination page={products.page} totalPages={products.totalPages} />
-                )}
             </div>
         </div>
     )

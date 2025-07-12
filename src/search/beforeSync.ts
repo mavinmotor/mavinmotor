@@ -17,6 +17,7 @@ export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searc
             description: meta?.description,
         },
         categories: [],
+        relationTo: collection
     }
 
     if (categories && Array.isArray(categories) && categories.length > 0) {

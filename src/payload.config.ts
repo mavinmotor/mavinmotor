@@ -12,7 +12,6 @@ import { Media } from './collections/media'
 import { Pages } from './collections/pages'
 import { defaultLexical } from './fields/defaultLexical'
 import { Products } from './collections/products'
-import { Posts } from './collections/posts'
 import { Categories } from './collections/catagories'
 import { Keywords } from './collections/keywords'
 import { plugins } from './plugins'
@@ -59,7 +58,7 @@ export default buildConfig({
       }
     }
   },
-  collections: [Pages, Posts, Products, Keywords, Categories, Users, Media],
+  collections: [Pages, Products, Keywords, Categories, Users, Media],
   globals: [Header, Footer],
   editor: defaultLexical,
   secret: process.env.PAYLOAD_SECRET || '',

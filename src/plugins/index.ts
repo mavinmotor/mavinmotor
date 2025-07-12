@@ -12,14 +12,14 @@ import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
-import type { Page, Post, Product } from '@/payload-types'
+import type { Page, Product } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 
-const generateTitle: GenerateTitle<Post | Page | Product> = ({ doc }) => {
+const generateTitle: GenerateTitle<Page | Product> = ({ doc }) => {
     return doc?.title ? doc.title : 'Empty autogen meta title'
 }
 
-const generateURL: GenerateURL<Post | Page | Product> = ({ doc }) => {
+const generateURL: GenerateURL<Page | Product> = ({ doc }) => {
     const url = getServerSideURL()
 
     return doc?.slug ? `${url}/${doc.slug}` : url
@@ -27,7 +27,7 @@ const generateURL: GenerateURL<Post | Page | Product> = ({ doc }) => {
 
 export const plugins: Plugin[] = [
     redirectsPlugin({
-        collections: ['pages', 'posts', 'products'],
+        collections: ['pages', 'products'],
         overrides: {
             admin: {
                 group: 'Add ons'
@@ -94,7 +94,7 @@ export const plugins: Plugin[] = [
         },
     }),
     searchPlugin({
-        collections: ['posts', 'products'],
+        collections: ['products'],
         beforeSync: beforeSyncWithSearch,
         searchOverrides: {
             admin: {
