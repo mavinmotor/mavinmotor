@@ -3,27 +3,25 @@
 import Link from 'next/link'
 import React, { Fragment } from 'react'
 
-import type { Post, Product } from '@/payload-types'
+import type { Product } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/utils'
 import useClickableCard from '@/utilities/useClickableCard'
 import { Badge } from '../ui/badge'
-import { Button } from '../ui/button'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 export type CardProductData = Pick<Product, 'slug' | 'categories' | 'meta' | 'title'>
 
 export const Card: React.FC<{
     alignItems?: 'center'
     className?: string
-    doc?: CardPostData | CardProductData
-    relationTo?: 'posts' | 'products'
+    doc?: CardProductData
+    relationTo?: 'products'
     showCategories?: boolean
     title?: string
 }> = (props) => {
     const { card, link } = useClickableCard({})
-    const { className, doc, relationTo, showCategories, title: titleFromProps } = props
+    const { className, doc, relationTo = "products", showCategories, title: titleFromProps } = props
 
     const { slug, categories, meta, title } = doc || {}
     const { description, image: metaImage } = meta || {}
@@ -82,7 +80,7 @@ export const Card: React.FC<{
                 {description && <div className="text-xs md:text-sm font-light line-clamp-2 md:line-clamp-3 text-secondary-foreground/85">{description && <p>{sanitizedDescription}</p>}</div>}
                 <div className='flex flex-col md:flex-row items-center justify-between mt-3'>
                     <Link href={href}><Badge variant={'secondary'} >MORE DETAILS..</Badge></Link>
-                    <Link href={'/contact-us'}><Badge className='bg-green-500 text-secondary-foreground'>PURCHASE</Badge></Link>
+                    <Link href={`https://wa.me/256778181840?text=${encodeURIComponent(`Product Name: ${titleToUse!} <br/> Product Description: ${description}`)}`}><Badge className='bg-green-500 text-secondary-foreground'>PURCHASE</Badge></Link>
                 </div>
             </div>
         </article>

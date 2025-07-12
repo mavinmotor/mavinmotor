@@ -12,12 +12,12 @@ import {
 import { CallToAction } from "@/add-ons/CallToAction/config";
 import { Content } from "@/add-ons/Content/config";
 import { MediaBlock } from "@/add-ons/MediaBlock/config";
-import { Archive } from "@/add-ons/ArchiveBlock/config";
 import { FormBlock } from "@/add-ons/Form/config";
 import { hero } from "@/heros/config";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
 import { populatePublishedAt } from "@/hooks/populatePublishedAt";
 import { Merchant } from "@/add-ons/MerchantBlock/config";
+import { Banner } from "@/add-ons/Banner/config";
 
 export const Pages: CollectionConfig<'pages'> = {
     slug: 'pages',
@@ -71,7 +71,7 @@ export const Pages: CollectionConfig<'pages'> = {
                         {
                             name: 'layout',
                             type: 'blocks',
-                            blocks: [CallToAction, Merchant, Content, MediaBlock, Archive, FormBlock],
+                            blocks: [CallToAction, Merchant, Content, MediaBlock, FormBlock],
                             required: true,
                             admin: {
                                 initCollapsed: true,

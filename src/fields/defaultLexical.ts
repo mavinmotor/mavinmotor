@@ -48,7 +48,7 @@ export const defaultLexical = lexicalEditor({
         StrikethroughFeature(),
         EXPERIMENTAL_TableFeature(),
         LinkFeature({
-            enabledCollections: ['pages', 'posts', 'products'],
+            enabledCollections: ['pages', 'products'],
             fields: ({ defaultFields }) => {
                 const defaultFieldsWithoutUrl = defaultFields.filter((field) => {
                     if ('name' in field && field.name === 'url') return false

@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 
 import type { Page } from '@/payload-types'
 
-import { ArchiveBlock } from '@/add-ons/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/add-ons/CallToAction/Component'
 import { ContentBlock } from '@/add-ons/Content/Component'
 import { FormBlock } from '@/add-ons/Form/Component'
@@ -10,7 +9,6 @@ import { MediaBlock } from '@/add-ons/MediaBlock/Component'
 import { MerchantBlock } from './MerchantBlock/Component'
 
 const blockComponents = {
-    archive: ArchiveBlock,
     content: ContentBlock,
     cta: CallToActionBlock,
     formBlock: FormBlock,

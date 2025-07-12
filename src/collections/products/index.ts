@@ -1,8 +1,11 @@
 import { slugField } from "@/fields/slug";
 import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from "@payloadcms/plugin-seo/fields";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { BlocksFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { CollectionConfig } from "payload";
 import { revalidateDelete, revalidateProducts } from "./hooks/revalidateProducts";
+import { Banner } from "@/add-ons/Banner/config";
+import { Code } from "@/add-ons/Code/config";
+import { MediaBlock } from "@/add-ons/MediaBlock/config";
 
 export const Products: CollectionConfig = {
     slug: 'products',
@@ -84,6 +87,7 @@ export const Products: CollectionConfig = {
                                 features: ({ rootFeatures }) => {
                                     return [
                                         ...rootFeatures,
+                                        BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
                                     ]
                                 },
                             }),

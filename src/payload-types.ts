@@ -68,7 +68,6 @@ export interface Config {
   blocks: {};
   collections: {
     pages: Page;
-    posts: Post;
     products: Product;
     keywords: Keyword;
     categories: Category;
@@ -86,12 +85,11 @@ export interface Config {
   };
   collectionsJoins: {
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'posts' | 'products' | 'media';
+      documentsAndFolders: 'payload-folders' | 'products' | 'media';
     };
   };
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
-    posts: PostsSelect<false> | PostsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     keywords: KeywordsSelect<false> | KeywordsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -189,10 +187,6 @@ export interface Page {
                   value: string | Page;
                 } | null)
               | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null)
-              | ({
                   relationTo: 'products';
                   value: string | Product;
                 } | null);
@@ -208,7 +202,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | MerchantBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | MerchantBlock | ContentBlock | MediaBlock | FormBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -227,13 +221,26 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
+ * via the `definition` "products".
  */
-export interface Post {
+export interface Product {
   id: string;
+  /**
+   * The title is basically the title of the page. (* Its a Required Field)
+   */
   title: string;
-  heroImage?: (string | null) | Media;
-  content: {
+  /**
+   * The Product Image is a poster image meant to represnet how the product looks like in a small screen preview
+   */
+  productImage?: (string | null) | Media;
+  quotation?:
+    | {
+        price?: string | null;
+        currency?: ('UGX' | 'USD' | 'KES') | null;
+        id?: string | null;
+      }[]
+    | null;
+  productDetails: {
     root: {
       type: string;
       children: {
@@ -248,25 +255,20 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  relatedPosts?: (string | Post)[] | null;
+  relatedPosts?: (string | Product)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
     title?: string | null;
     /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     * The Open Graph (OG) image and Twitter Card image provide a visual representation of your page or post when shared on social media platforms and in search results (though less directly for Google`s main SERP, it`s crucial for discovery on social channels). These images act as a `cover` for your content, helping to attract clicks and convey the essence of the page before a user even visits.
      */
     image?: (string | null) | Media;
+    /**
+     * Keywords are the specific words and phrases users type into search engines. Optimizing your content with relevant keywords helps search engines understand what your content is about, enabling it to appear in relevant search results when users are looking for information, products, or services that match your offerings.
+     */
     keywords?: (string | Keyword)[] | null;
     description?: string | null;
   };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
   slug?: string | null;
   slugLock?: boolean | null;
   folder?: (string | null) | FolderInterface;
@@ -383,10 +385,6 @@ export interface FolderInterface {
           value: string | FolderInterface;
         }
       | {
-          relationTo?: 'posts';
-          value: string | Post;
-        }
-      | {
           relationTo?: 'products';
           value: string | Product;
         }
@@ -400,63 +398,6 @@ export interface FolderInterface {
   };
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: string;
-  /**
-   * The title is basically the title of the page. (* Its a Required Field)
-   */
-  title: string;
-  /**
-   * The Product Image is a poster image meant to represnet how the product looks like in a small screen preview
-   */
-  productImage?: (string | null) | Media;
-  quotation?:
-    | {
-        price?: string | null;
-        currency?: ('UGX' | 'USD' | 'KES') | null;
-        id?: string | null;
-      }[]
-    | null;
-  productDetails: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedPosts?: (string | Product)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * The Open Graph (OG) image and Twitter Card image provide a visual representation of your page or post when shared on social media platforms and in search results (though less directly for Google`s main SERP, it`s crucial for discovery on social channels). These images act as a `cover` for your content, helping to attract clicks and convey the essence of the page before a user even visits.
-     */
-    image?: (string | null) | Media;
-    /**
-     * Keywords are the specific words and phrases users type into search engines. Optimizing your content with relevant keywords helps search engines understand what your content is about, enabling it to appear in relevant search results when users are looking for information, products, or services that match your offerings.
-     */
-    keywords?: (string | Keyword)[] | null;
-    description?: string | null;
-  };
-  slug?: string | null;
-  slugLock?: boolean | null;
-  folder?: (string | null) | FolderInterface;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -502,31 +443,6 @@ export interface Keyword {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  role: 'user' | 'admin';
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
@@ -554,10 +470,6 @@ export interface CallToActionBlock {
             | ({
                 relationTo: 'pages';
                 value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
               } | null)
             | ({
                 relationTo: 'products';
@@ -645,10 +557,6 @@ export interface ContentBlock {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null)
-            | ({
                 relationTo: 'products';
                 value: string | Product;
               } | null);
@@ -675,40 +583,6 @@ export interface MediaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock".
- */
-export interface ArchiveBlock {
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  populateBy?: ('collection' | 'selection') | null;
-  relationTo?: 'posts' | null;
-  categories?: (string | Category)[] | null;
-  limit?: number | null;
-  selectedDocs?:
-    | {
-        relationTo: 'posts';
-        value: string | Post;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'archive';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -912,6 +786,31 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: string;
+  role: 'user' | 'admin';
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -926,10 +825,6 @@ export interface Redirect {
       | ({
           relationTo: 'pages';
           value: string | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: string | Post;
         } | null)
       | ({
           relationTo: 'products';
@@ -967,21 +862,17 @@ export interface Search {
   id: string;
   title?: string | null;
   priority?: number | null;
-  doc:
-    | {
-        relationTo: 'posts';
-        value: string | Post;
-      }
-    | {
-        relationTo: 'products';
-        value: string | Product;
-      };
+  doc: {
+    relationTo: 'products';
+    value: string | Product;
+  };
   slug?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
     image?: (string | null) | Media;
   };
+  relationTo?: string | null;
   categories?:
     | {
         relationTo?: string | null;
@@ -1095,10 +986,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: string | Page;
-      } | null)
-    | ({
-        relationTo: 'posts';
-        value: string | Post;
       } | null)
     | ({
         relationTo: 'products';
@@ -1221,7 +1108,6 @@ export interface PagesSelect<T extends boolean = true> {
         merchant?: T | MerchantBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;
-        archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
@@ -1315,20 +1201,6 @@ export interface MediaBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ArchiveBlock_select".
- */
-export interface ArchiveBlockSelect<T extends boolean = true> {
-  introContent?: T;
-  populateBy?: T;
-  relationTo?: T;
-  categories?: T;
-  limit?: T;
-  selectedDocs?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FormBlock_select".
  */
 export interface FormBlockSelect<T extends boolean = true> {
@@ -1337,39 +1209,6 @@ export interface FormBlockSelect<T extends boolean = true> {
   introContent?: T;
   id?: T;
   blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
- */
-export interface PostsSelect<T extends boolean = true> {
-  title?: T;
-  heroImage?: T;
-  content?: T;
-  relatedPosts?: T;
-  categories?: T;
-  meta?:
-    | T
-    | {
-        title?: T;
-        image?: T;
-        keywords?: T;
-        description?: T;
-      };
-  publishedAt?: T;
-  authors?: T;
-  populatedAuthors?:
-    | T
-    | {
-        id?: T;
-        name?: T;
-      };
-  slug?: T;
-  slugLock?: T;
-  folder?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1742,6 +1581,7 @@ export interface SearchSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
+  relationTo?: T;
   categories?:
     | T
     | {
@@ -1844,10 +1684,6 @@ export interface Header {
                 value: string | Page;
               } | null)
             | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null)
-            | ({
                 relationTo: 'products';
                 value: string | Product;
               } | null);
@@ -1878,10 +1714,6 @@ export interface Footer {
                   | ({
                       relationTo: 'pages';
                       value: string | Page;
-                    } | null)
-                  | ({
-                      relationTo: 'posts';
-                      value: string | Post;
                     } | null)
                   | ({
                       relationTo: 'products';
@@ -1965,10 +1797,6 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'pages';
           value: string | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: string | Post;
         } | null)
       | ({
           relationTo: 'products';
