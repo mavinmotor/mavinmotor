@@ -41,17 +41,21 @@ export const ProductHero: React.FC<{
                         <p className='text-sm font-light text-secondary-foreground/85'>{description}</p>
                     </div>
 
-                    <div className="flex flex-col md:flex-row gap-3 md:gap-16">
+                    <div className="flex flex-col md:flex-row gap-3 mt-5">
                         {quotation && quotation?.map((item) => {
                             const { id, price, currency } = item
-                            return <Badge key={id} variant={'secondary'} className='p-3 rounded-none backdrop-blur-3xl'>{price} {currency}</Badge>
+                            return (
+                                <div className='flex items-center justify-center gap-2'>
+                                    <Badge
+                                        key={id}
+                                        variant={'secondary'}
+                                        className='p-2 backdrop-blur-3xl'
+                                    >
+                                        {price}
+                                    </Badge> <span className='text-2xl font-black'>{currency}</span>
+                                </div>
+                            )
                         })}
-                        {updatedAt && (
-                            <div className="flex flex-col gap-1">
-                                <p className="text-sm">Date Published</p>
-                                <time dateTime={updatedAt}>{formatDateTime(updatedAt)}</time>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
