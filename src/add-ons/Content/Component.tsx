@@ -28,7 +28,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                                     {
                                         'md:col-span-2': size !== 'full',
                                     },
-                                    isCarded && 'bg-card caret-card rounded-md p-5'
+                                    isCarded && 'bg-white/5 shadow backdrop-blur-3xl caret-card rounded-md p-5'
                                 )}
                                 key={index}
                             >

@@ -7,13 +7,15 @@ import { ContentBlock } from '@/add-ons/Content/Component'
 import { FormBlock } from '@/add-ons/Form/Component'
 import { MediaBlock } from '@/add-ons/MediaBlock/Component'
 import { MerchantBlock } from './MerchantBlock/Component'
+import { ImageGalleryBlock } from './ImageGallery/config'
 
 const blockComponents = {
     content: ContentBlock,
     cta: CallToActionBlock,
     formBlock: FormBlock,
     mediaBlock: MediaBlock,
-    merchant: MerchantBlock
+    merchant: MerchantBlock,
+    imageGalleryBlock: ImageGalleryBlock
 }
 
 export const RenderBlocks: React.FC<{

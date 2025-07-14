@@ -17,14 +17,16 @@ import type {
     BannerBlock as BannerBlockProps,
     CallToActionBlock as CTABlockProps,
     MediaBlock as MediaBlockProps,
+    ImageGalleryBlock as ImageGalleryProps
 } from '@/payload-types'
 import { BannerBlock } from '@/add-ons/Banner/Component'
 import { CallToActionBlock } from '@/add-ons/CallToAction/Component'
 import { cn } from '@/utilities/utils'
+import { GalleryBlock } from '@/add-ons/ImageGallery/Component'
 
 type NodeTypes =
     | DefaultNodeTypes
-    | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>
+    | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps | ImageGalleryProps>
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
     const { value, relationTo } = linkNode.fields.doc!
@@ -39,7 +41,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     ...defaultConverters,
     ...LinkJSXConverter({ internalDocToHref }),
     blocks: {
-        banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+        banner: ({ node }) => <BannerBlock className="col-start-2 mb-2" {...node.fields} />,
         mediaBlock: ({ node }) => (
             <MediaBlock
                 className="col-start-1 col-span-3"
@@ -52,6 +54,13 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
         ),
         code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
         cta: ({ node }) => <CallToActionBlock {...node.fields} />,
+        imageGallery: ({ node }) => <GalleryBlock
+            className='col-start-1 col-span-3'
+            imgClassName="m-0"
+            enableGutter={false}
+            disableInnerContainer={true}
+            {...node.fields}
+        />,
     },
 })
 

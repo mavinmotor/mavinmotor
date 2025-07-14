@@ -6,6 +6,7 @@ import { revalidateDelete, revalidateProducts } from "./hooks/revalidateProducts
 import { Banner } from "@/add-ons/Banner/config";
 import { Code } from "@/add-ons/Code/config";
 import { MediaBlock } from "@/add-ons/MediaBlock/config";
+import { ImageGalleryBlock } from "@/add-ons/ImageGallery/config";
 
 export const Products: CollectionConfig = {
     slug: 'products',
@@ -87,7 +88,7 @@ export const Products: CollectionConfig = {
                                 features: ({ rootFeatures }) => {
                                     return [
                                         ...rootFeatures,
-                                        BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                                        BlocksFeature({ blocks: [Banner, Code, MediaBlock, ImageGalleryBlock] }),
                                     ]
                                 },
                             }),
