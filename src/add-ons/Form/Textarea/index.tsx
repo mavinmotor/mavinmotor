@@ -32,7 +32,7 @@ export const Textarea: React.FC<
         id={name}
         rows={rows}
         minLength={200}
-        className='rounded-sm min-h-[8rem] border-0 backdrop-blur-3xl'
+        className='rounded-sm min-h-[8rem] border bg-input/45 backdrop-blur-3xl'
         {...register(name, { required: required })}
       />
 

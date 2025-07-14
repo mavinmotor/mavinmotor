@@ -28,7 +28,7 @@ export const Number: React.FC<
         defaultValue={defaultValue}
         id={name}
         type="number"
-        className='rounded-sm backdrop-blur-3xl border-0'
+        className='rounded-sm backdrop-blur-3xl border bg-input/45'
         {...register(name, { required })}
       />
       {errors[name] && <Error name={name} />}
