@@ -29,7 +29,7 @@ export const Email: React.FC<
         defaultValue={defaultValue}
         id={name}
         type="text"
-        className='rounded-sm py-6 backdrop-blur-3xl border-0'
+        className='rounded-sm py-6 backdrop-blur-3xl border bg-input/45'
         {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
       />
 

@@ -28,7 +28,7 @@ export const Text: React.FC<
       <Input defaultValue={defaultValue}
         id={name}
         type="text"
-        className='rounded-sm py-6 border-0 backdrop-blur-3xl'
+        className='rounded-sm py-6 border bg-input/45 backdrop-blur-3xl'
         {...register(name, { required })} />
       {errors[name] && <Error name={name} />}
     </Width>

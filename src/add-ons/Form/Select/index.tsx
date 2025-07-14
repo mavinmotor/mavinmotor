@@ -40,7 +40,7 @@ export const Select: React.FC<
 
           return (
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full rounded-sm text-destructive backdrop-blur-3xl" id={name}>
+              <SelectTrigger className="w-full rounded-sm border bg-input/45 text-destructive backdrop-blur-3xl" id={name}>
                 <SelectValue placeholder={label} />
               </SelectTrigger>
               <SelectContent>
